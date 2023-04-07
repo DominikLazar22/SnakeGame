@@ -35,20 +35,28 @@ public class Game implements KeyListener{
 		frame.pack();
 		frame.setVisible(true);
 		frame.setResizable(false);
+		frame.setLocationRelativeTo(null);
+		
+		try {
+			gameLoop();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void gameLoop() throws InterruptedException {
-		System.out.println("StartLoop");
-		while(alive) {
-			//sleep
-			Thread.sleep(400);
-			if(!checkFood()) {
-				head.move(direction);
+		while(true) {
+			if(alive) {
+				//sleep
+				Thread.sleep(400);
+				if(!checkFood()) {
+					head.move(direction);
+				}
+				alive = head.isAlive(boxesCount);
 			}
 			canvas.update();
-			alive = head.isAlive(boxesCount);
 		}
-		System.out.println("End Loop");
 	}
 	
 	private boolean checkFood() {
@@ -70,7 +78,6 @@ public class Game implements KeyListener{
 		int headY = rd.nextInt(boxesCount-1);
 		
 		head = new Snake(headX, headY);
-		System.out.println("Generate Head" + head.getX() +","+ head.getY() + "REAL: " + headX + "," + headY);
 		getFood();
 	}
 	
@@ -137,7 +144,7 @@ public class Game implements KeyListener{
 		else if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			direction = (direction + 1) % 4;
 		}else if(e.getKeyCode() == KeyEvent.VK_ENTER && !alive) {
-			restartGame();
+			initialize();
 		}
 		
 		
@@ -149,15 +156,4 @@ public class Game implements KeyListener{
 		
 	}
 	
-	private void restartGame() {
-		System.out.println("Restart Game");
-		try {
-			initialize();
-			gameLoop();
-			canvas.update();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 }

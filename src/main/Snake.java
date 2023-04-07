@@ -76,7 +76,6 @@ public class Snake {
 		
 		//head outside of board
 		if(headX < 0 || headY < 0 || headX >= boardSize || headY >= boardSize) {
-			System.out.println("Dead because out of range:" + headX + "," + headY);
 			return false;
 		}
 		
@@ -87,8 +86,6 @@ public class Snake {
 			int tailY = tmp.y;
 			
 			if(headX == tailX && headY == tailY) {
-				System.out.println("Dead because collision: HEAD(" + headX +"," + headY +") "
-						+ "| Collision(" + tailX + "," + tailY);
 				return false;
 			}
 			tmp = tmp.next;
