@@ -49,7 +49,8 @@ public class Game implements KeyListener{
 		while(true) {
 			if(alive) {
 				//sleep
-				Thread.sleep(400);
+				int speed = 25 * head.getLength();
+				Thread.sleep(400 - speed);
 				if(!checkFood()) {
 					head.move(direction);
 				}

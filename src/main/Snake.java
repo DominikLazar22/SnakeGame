@@ -8,6 +8,7 @@ public class Snake {
 	private int x, y;
 	
 	private Snake next;
+	private int length = 0;
 	
 	public Snake(int x, int y) {
 		this.x = x;
@@ -136,6 +137,11 @@ public class Snake {
 			move(direction);
 			tmp.next = new Snake(tmpX, tmpY);
 		}
+		length++;
+	}
+	
+	public int getLength() {
+		return length;
 	}
 	
 	
